@@ -142,8 +142,8 @@ export function generateQuestion(topic: Topic, ageGroup: AgeGroup): Question {
 
 const SESSION_LENGTH: Record<AgeGroup, number> = {
   '3-4': 5,
-  '5-6': 7,
-  '7-8': 9,
+  '5-6': 10,
+  '7-8': 10,
   '9-10': 10,
 }
 

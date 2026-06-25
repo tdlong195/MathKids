@@ -153,7 +153,7 @@ Toàn bộ logic sinh đề bài, validate đáp án, tính điểm — viết b
 3. **Animation:** Chậm, rõ ràng — duration 400ms-800ms. Không dùng `ease` nhanh như UI người lớn. Xem `kid-animation-skill.md`
 4. **Khi sai:** KHÔNG hiện "Sai rồi!" to. Dùng ngôn ngữ tích cực: "Thử lại nhé! 💪", "Gần đúng rồi!"
 5. **Khi đúng lần 2 (sau khi sai):** Highlight nhẹ đáp án đúng, không phạt, không trừ điểm kèm animation
-6. **Session ngắn:** 5 câu (3-4 tuổi), 7 câu (5-6 tuổi), 9 câu (7-8 tuổi), 10 câu (9-10 tuổi). Sau session có màn celebration bắt buộc
+6. **Session ngắn:** 5 câu (3-4 tuổi), 10 câu (5-6 tuổi), 10 câu (7-8 tuổi), 10 câu (9-10 tuổi). Sau session có màn celebration bắt buộc
 7. **Ưu tiên chạm/kéo thả:** Đặc biệt nhóm 3-5 tuổi — tránh yêu cầu nhập bàn phím
 8. **Không có cảm giác "game over":** App luôn cho phép thử lại hoặc chuyển chủ đề
 9. **Drag-and-drop:** Luôn có visual feedback khi item đang được kéo (scale up + shadow). Drop zone highlight khi item hover qua. Snap animation khi thả vào đúng vị trí (spring, 300ms)

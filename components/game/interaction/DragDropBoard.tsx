@@ -80,14 +80,6 @@ const ItemsInZone = styled.div`
   min-height: 40px;
 `
 
-const shake = `
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
-  }
-`
-
 const CardsRow = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.md};
@@ -258,7 +250,7 @@ export function DragDropBoard({ question, phase, selectedId, onSelect, onAnswer 
             <DragCard
               key={item.id}
               $used={item.id in itemPlacements}
-              drag={!isDisabled && !(item.id in itemPlacements)}
+              drag={!isDisabled}
               dragSnapToOrigin
               onDragStart={() => setHoveringZone(null)}
               onDragEnd={(_e, info) => handleDragEnd(item.id, info)}

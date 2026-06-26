@@ -3,10 +3,10 @@ import { Question, Choice } from '@/types/question'
 const EMOJI_SETS = {
   colors: ['🔴', '🔵', '🟢', '🟡', '🟣', '🟠'],
   animals: ['🐶', '🐱', '🐭', '🐹', '🦊', '🐸'],
-  objects: ['🍎', '🍌', '🍊', '⭐', '💛', '💎'],
+  objects: ['🍎', '🍌', '🍊', '💎', '💛', '⭐'],
 }
 
-type PatternType = 'cyclic' | 'alternating' | 'pairs' | 'ascending' | 'mixed' | 'mirror'
+type PatternType = 'cyclic' | 'alternating'
 
 function randomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -35,7 +35,7 @@ function getDistractors(correctEmoji: string, usedEmojis: string[]): string[] {
   return Array.from(distractors)
 }
 
-// Pattern Type 1: Cyclic (🔴🔵🔴🔵...)
+// Pattern Type 1: Cyclic (🔴🔵🔴🔵🔴🔵...)
 function generateCyclic(emojis: string[], length: number): string[] {
   const pattern: string[] = []
   for (let i = 0; i < length; i++) {
@@ -54,70 +54,14 @@ function generateAlternating(emojis: string[], length: number): string[] {
       pattern.push(emojis[idx % emojis.length])
     }
     idx++
-    if (idx % 2 === 0) count++ // tăng tần số cứ sau 2 emoji
+    if (idx % 2 === 0) count++
   }
   return pattern
 }
 
-// Pattern Type 3: Pairs (🔴🔴 🔵🔵 🟢🟢...)
-function generatePairs(emojis: string[], length: number): string[] {
-  const pattern: string[] = []
-  for (let i = 0; i < emojis.length && pattern.length < length; i++) {
-    pattern.push(emojis[i], emojis[i])
-  }
-  return pattern.slice(0, length)
-}
-
-// Pattern Type 4: Ascending then descending (🔴 🔵 🟢 🔵 🔴)
-function generateMirror(emojis: string[], length: number): string[] {
-  const pattern: string[] = []
-  const half = Math.ceil(emojis.length / 2)
-
-  // Ascending
-  for (let i = 0; i < half && pattern.length < length; i++) {
-    pattern.push(emojis[i])
-  }
-  // Descending
-  for (let i = half - 2; i >= 0 && pattern.length < length; i--) {
-    pattern.push(emojis[i])
-  }
-
-  return pattern.slice(0, length)
-}
-
-// Pattern Type 5: Mixed rule (repeat count increases: 🔴 🔵🔵 🟢🟢🟢...)
-function generateMixed(emojis: string[], length: number): string[] {
-  const pattern: string[] = []
-  for (let i = 0; i < emojis.length; i++) {
-    for (let j = 0; j <= i && pattern.length < length; j++) {
-      pattern.push(emojis[i])
-    }
-  }
-  return pattern.slice(0, length)
-}
-
-// Pattern Type 6: Alternating two types with rule (🔴 🔵 🔴 🔴 🔵 🔵 🔴 🔴 🔴...)
-function generateAscending(emojis: string[], length: number): string[] {
-  const pattern: string[] = []
-  let e1 = emojis[0], e2 = emojis[1]
-  let count = 1
-  let toggle = 0
-
-  while (pattern.length < length) {
-    const emoji = toggle === 0 ? e1 : e2
-    for (let i = 0; i < count && pattern.length < length; i++) {
-      pattern.push(emoji)
-    }
-    toggle = 1 - toggle
-    if (toggle === 0) count++
-  }
-
-  return pattern.slice(0, length)
-}
-
 export function generatePatternSeq(difficulty: 1 | 2 | 3): Question {
-  const patternTypes: PatternType[] = ['cyclic', 'alternating', 'pairs', 'ascending', 'mixed', 'mirror']
-  const selectedType = patternTypes[randomInt(0, patternTypes.length - 1)] as PatternType
+  const patternTypes: PatternType[] = ['cyclic', 'alternating']
+  const selectedType = patternTypes[randomInt(0, patternTypes.length - 1)]
 
   let emojis: string[]
   let pattern: string[]
@@ -141,18 +85,6 @@ export function generatePatternSeq(difficulty: 1 | 2 | 3): Question {
       break
     case 'alternating':
       pattern = generateAlternating(emojis, patternLength)
-      break
-    case 'pairs':
-      pattern = generatePairs(emojis, patternLength)
-      break
-    case 'ascending':
-      pattern = generateAscending(emojis, patternLength)
-      break
-    case 'mixed':
-      pattern = generateMixed(emojis, patternLength)
-      break
-    case 'mirror':
-      pattern = generateMirror(emojis, patternLength)
       break
   }
 

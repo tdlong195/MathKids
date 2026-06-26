@@ -43,7 +43,7 @@ export default function ResultsPage() {
 
   const handleHome = () => {
     resetGame()
-    router.replace('/')
+    router.replace('/topics')
   }
 
   return (

@@ -126,7 +126,7 @@ export function CelebrationScreen({ starsEarned, totalPossible, onContinue, onHo
           Chơi tiếp 🚀
         </KidButton>
         <KidButton $variant="ghost" onClick={onHome} style={{ width: '100%' }}>
-          Về nhà 🏠
+          Chọn bài khác 📚
         </KidButton>
       </ButtonRow>
     </ScreenWrapper>

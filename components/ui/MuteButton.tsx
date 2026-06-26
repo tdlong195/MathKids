@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 import { soundManager } from '@/lib/sound/soundManager'
+import { ttsManager } from '@/lib/tts/ttsManager'
 import { SPRING_SNAP } from '@/lib/animation/springs'
 
 const ButtonWrapper = styled(motion.button)`
@@ -36,6 +37,7 @@ export function MuteButton() {
     setMuted(next)
     soundManager.setMuted(next)
     soundManager.saveMutePreference()
+    if (next) ttsManager.cancel()
   }
 
   return (

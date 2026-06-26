@@ -2,15 +2,17 @@ import type { Question } from '@/types/question'
 import { buildQuestion, randomInt } from './index'
 
 export function generateSkipCounting(difficulty: 1 | 2 | 3): Question {
-  const skipOptions = [2, 5, 10]
-  const skip = skipOptions[randomInt(0, skipOptions.length - 1)]
-
+  let skip: number
   let sequenceLength: number
+
   if (difficulty === 1) {
+    skip = 2
     sequenceLength = 3
   } else if (difficulty === 2) {
+    skip = [2, 5][randomInt(0, 1)]
     sequenceLength = 4
   } else {
+    skip = [2, 5, 10][randomInt(0, 2)]
     sequenceLength = 5
   }
 

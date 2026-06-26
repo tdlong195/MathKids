@@ -37,8 +37,8 @@ const SORT_TASKS = {
       items: [
         { emoji: '🔴', zoneId: 'zone1' },
         { emoji: '🟦', zoneId: 'zone2' },
-        { emoji: '⭐', zoneId: 'zone1' },
-        { emoji: '🔷', zoneId: 'zone2' },
+        { emoji: '🟠', zoneId: 'zone1' },
+        { emoji: '🟪', zoneId: 'zone2' },
         { emoji: '🔵', zoneId: 'zone1' },
         { emoji: '🟨', zoneId: 'zone2' },
       ],
@@ -108,7 +108,7 @@ export function generateLogicSort(difficulty: 1 | 2 | 3): Question {
   }
 
   return {
-    id: `logicSort-${Date.now()}`,
+    id: `logicSort-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     topic: 'logicSort',
     interactionMode: 'dragDrop',
     prompt: 'Kéo từng vật vào nhóm đúng',

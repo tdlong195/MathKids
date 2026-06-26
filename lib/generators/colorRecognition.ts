@@ -1,5 +1,5 @@
 import type { Question } from '@/types/question'
-import { buildQuestion, randomInt } from './index'
+import { randomInt } from './index'
 
 interface ColorItem {
   name: string
@@ -23,21 +23,22 @@ const colorItems: ColorItem[] = [
 export function generateColorRecognition(difficulty: 1 | 2 | 3): Question {
   const targetItem = colorItems[randomInt(0, colorItems.length - 1)]
 
-  const otherItems = colorItems
-    .filter(item => item.color !== targetItem.color)
-    .slice(0, 3)
+  const otherItems = colorItems.filter(item => item.color !== targetItem.color)
+  const shuffled = [...otherItems].sort(() => Math.random() - 0.5)
+  const selectedOthers = shuffled.slice(0, 3)
 
-  const choices = [targetItem, ...otherItems].sort(() => Math.random() - 0.5)
+  const allChoices = [targetItem, ...selectedOthers].sort(() => Math.random() - 0.5)
+  const choices = allChoices.map((item, i) => ({ id: `c-${i}`, label: item.emoji }))
+  const correctId = choices.find(c => c.label === targetItem.emoji)!.id
 
-  const params = {
+  return {
+    id: `colorRecognition-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     topic: 'colorRecognition',
-    interactionMode: 'choice' as const,
+    interactionMode: 'choice',
     prompt: `Tìm vật có màu ${targetItem.color}!`,
     visualEmojis: [targetItem.emoji],
-    correct: targetItem.emoji,
-    distractors: otherItems.map(item => item.emoji),
+    choices,
+    correctId,
     difficulty,
   }
-
-  return buildQuestion(params)
 }

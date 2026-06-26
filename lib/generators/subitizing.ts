@@ -21,13 +21,13 @@ export function generateSubitizing(difficulty: 1 | 2 | 3): Question {
   const selectedEmoji = emojis[randomInt(0, emojis.length - 1)]
   const visualEmojis = Array(itemCount).fill(selectedEmoji)
 
-  const distractors = [itemCount - 1, itemCount + 1, itemCount + randomInt(2, 3)]
-    .filter(n => n > 0 && n <= 10)
-    .slice(0, 2)
+  const candidates = [itemCount - 2, itemCount - 1, itemCount + 1, itemCount + 2]
+    .filter(n => n > 0 && n <= 10 && n !== itemCount)
 
+  const distractors = candidates.slice(0, 2)
   if (distractors.length < 2) {
-    if (itemCount > 1) distractors.push(itemCount - 2)
-    if (itemCount < 9) distractors.push(itemCount + 2)
+    const remaining = [itemCount - 3, itemCount + 3].filter(n => n > 0 && n <= 10 && n !== itemCount)
+    distractors.push(...remaining)
   }
 
   const params = {

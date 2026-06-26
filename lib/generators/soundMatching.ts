@@ -1,5 +1,5 @@
 import type { Question } from '@/types/question'
-import { buildQuestion, randomInt } from './index'
+import { randomInt } from './index'
 
 interface SoundMatch {
   animal: string
@@ -24,21 +24,21 @@ export function generateSoundMatching(difficulty: 1 | 2 | 3): Question {
 
   const otherMatches = soundMatches
     .filter(match => match.animal !== targetMatch.animal)
+    .sort(() => Math.random() - 0.5)
     .slice(0, 3)
 
-  const choices = [targetMatch, ...otherMatches]
-    .sort(() => Math.random() - 0.5)
+  const allChoices = [targetMatch, ...otherMatches].sort(() => Math.random() - 0.5)
+  const choices = allChoices.map((match, i) => ({ id: `c-${i}`, label: match.emoji }))
+  const correctId = choices.find(c => c.label === targetMatch.emoji)!.id
 
-  const params = {
+  return {
+    id: `soundMatching-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     topic: 'soundMatching',
-    interactionMode: 'choice' as const,
+    interactionMode: 'choice',
     prompt: `Nghe âm thanh: "${targetMatch.sound}". Chọn con vật nào?`,
-    visualEmojis: choices.map(m => m.emoji),
-    correct: targetMatch.emoji,
-    distractors: otherMatches.map(m => m.emoji),
+    choices,
+    correctId,
     difficulty,
     timeLimit: 5000,
   }
-
-  return buildQuestion(params)
 }

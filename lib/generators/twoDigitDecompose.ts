@@ -23,8 +23,9 @@ export function generateTwoDigitDecompose(difficulty: 1 | 2 | 3): Question {
 
   const correct = askForTens ? tens : ones
 
+  const minVal = askForTens ? 1 : 0
   const distractors = [correct - 1, correct + 1, correct - 2, correct + 2]
-    .filter(n => n >= 0 && n <= 10 && n !== correct)
+    .filter(n => n >= minVal && n <= 10 && n !== correct)
     .slice(0, 2)
 
   const params = {

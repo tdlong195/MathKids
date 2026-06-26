@@ -39,7 +39,7 @@ export function generateOneMoreLess(difficulty: 1 | 2 | 3): Question {
     prompt,
     visualEmojis,
     correct: resultNum,
-    distractors,
+    distractors: distractors.slice(0, 2),
     difficulty,
   }
 

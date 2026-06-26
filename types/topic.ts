@@ -14,6 +14,10 @@ export type Topic =
   | 'colorRecognition' // nhận diện màu sắc
   | 'soundMatching'   // ghép âm thanh với hình ảnh
   // 5-6 tuổi
+  | 'oneMoreLess'     // thêm/bớt 1
+  | 'numberBonds'     // phân tích số (part-part-whole)
+  | 'skipCounting'    // đếm nhảy 2, 5, 10
+  | 'twoDigitDecompose' // tách số 2 chữ số (chục + đơn vị)
   | 'addition'        // cộng ≤10 (also 7-8)
   | 'subtraction'     // trừ ≤10 (also 7-8)
   | 'sequence'        // điền số còn thiếu
@@ -63,6 +67,10 @@ export const TOPIC_META: TopicMeta[] = [
   { id: 'colorRecognition', labelVi: 'Nhận diện màu',  emoji: '🎨', ageGroups: ['3-4'] },
   { id: 'soundMatching',  labelVi: 'Ghép âm thanh',   emoji: '🔊', ageGroups: ['3-4'] },
   // 5-6 tuổi
+  { id: 'oneMoreLess',    labelVi: 'Thêm/Bớt 1',      emoji: '➕➖', ageGroups: ['5-6'] },
+  { id: 'numberBonds',    labelVi: 'Phân tích số',    emoji: '🔗', ageGroups: ['5-6'] },
+  { id: 'skipCounting',   labelVi: 'Đếm nhảy',        emoji: '🦘', ageGroups: ['5-6', '7-8'] },
+  { id: 'twoDigitDecompose', labelVi: 'Tách số 2 chữ', emoji: '🔢', ageGroups: ['5-6'] },
   { id: 'addition',       labelVi: 'Phép cộng',        emoji: '➕', ageGroups: ['5-6', '7-8'] },
   { id: 'subtraction',    labelVi: 'Phép trừ',         emoji: '➖', ageGroups: ['5-6', '7-8'] },
   { id: 'sequence',       labelVi: 'Dãy số',           emoji: '🔗', ageGroups: ['5-6'] },

@@ -29,6 +29,10 @@ import { generateCodeSequence } from './codeSequence'
 import { generateSubitizing } from './subitizing'
 import { generateColorRecognition } from './colorRecognition'
 import { generateSoundMatching } from './soundMatching'
+import { generateOneMoreLess } from './oneMoreLess'
+import { generateNumberBonds } from './numberBonds'
+import { generateSkipCounting } from './skipCounting'
+import { generateTwoDigitDecompose } from './twoDigitDecompose'
 
 export function randomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -141,6 +145,10 @@ export function generateQuestion(topic: Topic, ageGroup: AgeGroup): Question {
     case 'subitizing':      return generateSubitizing(difficulty)
     case 'colorRecognition': return generateColorRecognition(difficulty)
     case 'soundMatching':   return generateSoundMatching(difficulty)
+    case 'oneMoreLess':     return generateOneMoreLess(difficulty)
+    case 'numberBonds':     return generateNumberBonds(difficulty)
+    case 'skipCounting':    return generateSkipCounting(difficulty)
+    case 'twoDigitDecompose': return generateTwoDigitDecompose(difficulty)
     default:
       throw new Error(`Unknown topic: ${topic}`)
   }

@@ -114,8 +114,10 @@ export function QuestionDisplay({ question }: Props) {
             <ReadAloudButton
               onClick={speak}
               whileTap={{ scale: 0.85 }}
-              transition={SPRING_SNAP}
-              animate={speaking ? { scale: [1, 1.12, 1] } : { scale: 1 }}
+              animate={speaking ? { scale: 1.12 } : { scale: 1 }}
+              transition={speaking
+                ? { repeat: Infinity, repeatType: 'reverse', duration: 0.4, type: 'tween' }
+                : SPRING_SNAP}
               aria-label="Đọc lại câu hỏi"
               title="Đọc lại câu hỏi"
             >

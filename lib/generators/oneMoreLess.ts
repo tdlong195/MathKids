@@ -21,10 +21,14 @@ export function generateOneMoreLess(difficulty: 1 | 2 | 3): Question {
 
   const visualEmojis = Array(startNum).fill(selectedEmoji)
 
-  const distractors = [
-    isMore ? resultNum - 1 : resultNum + 1,
-    isMore ? resultNum - 2 : resultNum + 2,
-  ].filter(n => n > 0 && n <= 20)
+  const candidates = [resultNum - 2, resultNum - 1, resultNum + 1, resultNum + 2]
+    .filter(n => n > 0 && n <= 20 && n !== resultNum)
+
+  const distractors = candidates.slice(0, 2)
+  if (distractors.length < 2) {
+    const remaining = [resultNum - 3, resultNum + 3].filter(n => n > 0 && n <= 20)
+    distractors.push(...remaining)
+  }
 
   const action = isMore ? 'thêm 1' : 'bớt đi 1'
   const prompt = `Có ${startNum} ${selectedEmoji}. ${action}. Bây giờ có mấy?`

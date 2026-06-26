@@ -25,9 +25,12 @@ export function generateColorRecognition(difficulty: 1 | 2 | 3): Question {
 
   const otherItems = colorItems
     .filter(item => item.color !== targetItem.color)
-    .slice(0, 3)
 
-  const choices = [targetItem, ...otherItems].sort(() => Math.random() - 0.5)
+  // Ensure at least 2 different-color items + shuffle to avoid picking same color
+  const selectedOthers = []
+  for (let i = 0; i < Math.min(3, otherItems.length); i++) {
+    selectedOthers.push(otherItems[randomInt(0, otherItems.length - 1)])
+  }
 
   const params = {
     topic: 'colorRecognition',
@@ -35,7 +38,7 @@ export function generateColorRecognition(difficulty: 1 | 2 | 3): Question {
     prompt: `Tìm vật có màu ${targetItem.color}!`,
     visualEmojis: [targetItem.emoji],
     correct: targetItem.emoji,
-    distractors: otherItems.map(item => item.emoji),
+    distractors: selectedOthers.map(item => item.emoji),
     difficulty,
   }
 

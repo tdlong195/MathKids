@@ -15,7 +15,7 @@ const soundMatches: SoundMatch[] = [
   { animal: 'vịt', emoji: '🦆', sound: 'vịt kêu', soundFile: 'duck' },
   { animal: 'sư tử', emoji: '🦁', sound: 'sư tử gầm', soundFile: 'lion' },
   { animal: 'voi', emoji: '🐘', sound: 'voi kêu', soundFile: 'elephant' },
-  { animal: 'cows', emoji: '🐄', sound: 'bò kêu', soundFile: 'cow' },
+  { animal: 'bò', emoji: '🐄', sound: 'bò kêu', soundFile: 'cow' },
   { animal: 'lợn', emoji: '🐷', sound: 'lợn kêu', soundFile: 'pig' },
 ]
 

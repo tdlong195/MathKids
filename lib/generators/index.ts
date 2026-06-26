@@ -26,6 +26,9 @@ import { generateGridPattern } from './gridPattern'
 import { generateAnalogies } from './analogyThinking'
 import { generateLogicSort } from './logicSort'
 import { generateCodeSequence } from './codeSequence'
+import { generateSubitizing } from './subitizing'
+import { generateColorRecognition } from './colorRecognition'
+import { generateSoundMatching } from './soundMatching'
 
 export function randomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -135,6 +138,9 @@ export function generateQuestion(topic: Topic, ageGroup: AgeGroup): Question {
     case 'analogyThinking': return generateAnalogies(difficulty)
     case 'logicSort':       return generateLogicSort(difficulty)
     case 'codeSequence':    return generateCodeSequence(difficulty as 2 | 3)
+    case 'subitizing':      return generateSubitizing(difficulty)
+    case 'colorRecognition': return generateColorRecognition(difficulty)
+    case 'soundMatching':   return generateSoundMatching(difficulty)
     default:
       throw new Error(`Unknown topic: ${topic}`)
   }

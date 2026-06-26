@@ -10,6 +10,9 @@ export type Topic =
   | 'memoryMatch'     // lật thẻ tìm cặp (memoryFlip)
   | 'patternSeq'      // nhận diện quy luật dãy (also 5-6)
   | 'oddOneOut'       // tìm vật khác loại (also 5-6)
+  | 'subitizing'      // nhận diện nhanh số lượng
+  | 'colorRecognition' // nhận diện màu sắc
+  | 'soundMatching'   // ghép âm thanh với hình ảnh
   // 5-6 tuổi
   | 'addition'        // cộng ≤10 (also 7-8)
   | 'subtraction'     // trừ ≤10 (also 7-8)
@@ -56,6 +59,9 @@ export const TOPIC_META: TopicMeta[] = [
   { id: 'memoryMatch',    labelVi: 'Ghi nhớ',          emoji: '🧠', ageGroups: ['3-4', '5-6'] },
   { id: 'patternSeq',     labelVi: 'Quy luật dãy',    emoji: '🔄', ageGroups: ['3-4', '5-6'] },
   { id: 'oddOneOut',      labelVi: 'Vật khác loại',   emoji: '❓', ageGroups: ['3-4', '5-6'] },
+  { id: 'subitizing',     labelVi: 'Nhận nhanh số',   emoji: '⚡', ageGroups: ['3-4', '5-6'] },
+  { id: 'colorRecognition', labelVi: 'Nhận diện màu',  emoji: '🎨', ageGroups: ['3-4'] },
+  { id: 'soundMatching',  labelVi: 'Ghép âm thanh',   emoji: '🔊', ageGroups: ['3-4'] },
   // 5-6 tuổi
   { id: 'addition',       labelVi: 'Phép cộng',        emoji: '➕', ageGroups: ['5-6', '7-8'] },
   { id: 'subtraction',    labelVi: 'Phép trừ',         emoji: '➖', ageGroups: ['5-6', '7-8'] },

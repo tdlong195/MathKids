@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import { useGameStore } from '@/store/gameStore'
 import { useProfileStore } from '@/store/profileStore'
+import { ttsManager } from '@/lib/tts/ttsManager'
 import { QuestionDisplay } from '@/components/game/QuestionDisplay'
 import { InteractionRouter } from '@/components/game/interaction/InteractionRouter'
 import { FeedbackOverlay } from '@/components/game/FeedbackOverlay'
@@ -40,6 +41,24 @@ const GameArea = styled.div`
   gap: ${({ theme }) => theme.spacing.lg};
 `
 
+const BackButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  min-width: ${({ theme }) => theme.touch.min};
+  min-height: ${({ theme }) => theme.touch.min};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${({ theme }) => theme.radius.full};
+  flex-shrink: 0;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.primaryLight};
+  }
+`
+
 const QuestionCounter = styled.span`
   font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.colors.textSecondary};
@@ -54,7 +73,7 @@ const FULL_BOARD_MODES = new Set(['memoryFlip', 'ordering'])
 
 export default function PlayPage() {
   const router = useRouter()
-  const { phase, questions, currentIndex, sessionStars, gameMode, submitAnswer, submitResult, nextQuestion, getCurrentQuestion } = useGameStore()
+  const { phase, questions, currentIndex, sessionStars, gameMode, submitAnswer, submitResult, nextQuestion, getCurrentQuestion, resetGame } = useGameStore()
   const { getCurrentProfile, awardStars, recordResultWithAchievements } = useProfileStore()
   const { newAchievementIds, setNewAchievements } = useGameStore()
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -159,6 +178,12 @@ export default function PlayPage() {
   return (
     <PageWrapper>
       <TopBar>
+        <BackButton
+          onClick={() => { ttsManager.cancel(); resetGame(); router.replace('/topics') }}
+          aria-label="Quay lại chọn bài"
+        >
+          ←
+        </BackButton>
         <ScoreBar
           current={currentIndex}
           total={questions.length}
